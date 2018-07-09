@@ -37,7 +37,7 @@ dependency in your `build.gradle`.
 (module)
 ```groovy    
     dependencies {
-        compile 'com.pes.materialcolorpicker:library:1.2.0'
+        // will update soon
     }
 ```
 
@@ -45,13 +45,13 @@ dependency in your `build.gradle`.
 
 Import the class
 ```java
-    import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
+    // will update soon
 ```
 
 Create a color picker dialog object
 
 ```java
-    final ColorPicker cp = new ColorPicker(MainActivity.this, defaultColorR, defaultColorG, defaultColorB);
+    ColorPicker colorPicker = new ColorPicker(context, red, green, blue);
 ```
 
 defaultColorR, defaultColorG, defaultColorB are 3 integer (value 0-255) for the initialization of the color picker with your custom color value. If you don't want to start with a color set them to 0 or use only the first argument.
@@ -61,51 +61,54 @@ The library also supports alpha values. If no color or only red, green, and blue
 Use the following constructor to specify an alternative alpha channel value (0..255). As soon as the alpha value constructor is used, a fourth slider will appear above the RGB sliders and the text input field will change from six HEX characters to eight.
 
 ```java
-    final ColorPicker cp = new ColorPicker(MainActivity.this, defaultAlphaValue, defaultColorR, defaultColorG, defaultColorB);
+    ColorPicker colorPicker = new ColorPicker(context, alpha, red, green, blue);
 ```
 
 
 Then show the dialog (when and where you want) and save the selected color
 
 ```java
-    /* Show color picker dialog */
-    cp.show();
-    
-	cp.enableAutoClose(); // Enable auto-dismiss for the dialog
+    // Various configurations, all of the below are optional
+    colorPicker.setCloseOnDialogButtonPressed(true)
+            .setDialogButtonText("CONFIRM")
+            .setCloseOnBackPressed(false)
+            .showButtonAsTransparent(true)
+            // If this activity already implements the ColorPickerCallback,
+            // this last configuration is technically unnecessary
+            .setCallback(this);
 	
     /* Set a new Listener called when user click "select" */
-    cp.setCallback(new ColorPickerCallback() {
+    colorPicker.setCallback(new ColorPickerCallback() {
         @Override
-        public void onColorChosen(@ColorInt int color) {
-            // Do whatever you want
-	    // Examples
-	    Log.d("Alpha", Integer.toString(Color.alpha(color)));
-	    Log.d("Red", Integer.toString(Color.red(color)));
-	    Log.d("Green", Integer.toString(Color.green(color)));
-	    Log.d("Blue", Integer.toString(Color.blue(color)));
-
-	    Log.d("Pure Hex", Integer.toHexString(color));
-	    Log.d("#Hex no alpha", String.format("#%06X", (0xFFFFFF & color)));
-	    Log.d("#Hex with alpha", String.format("#%08X", (0xFFFFFFFF & color)));
-		
-		// If the auto-dismiss option is not enable (disabled as default) you have to manually dimiss the dialog
-		// cp.dismiss();
+        public void onColorChosen(@ColorInt int color, String hex, String hexNoAlpha) {
+            Log.d("Pure color", String.valueOf(color));
+            Log.d("Alpha", Integer.toString(Color.alpha(color)));
+            Log.d("Red", Integer.toString(Color.red(color)));
+            Log.d("Green", Integer.toString(Color.green(color)));
+            Log.d("Blue", Integer.toString(Color.blue(color)));
+            Log.d("Hex with alpha", hex);
+            Log.d("Hex no alpha", hexNoAlpha);
+            // Once the dialog's select button has been pressed, we
+            // can get the selected color and use it for the
+            // background of our view
+            colorView.setBackgroundColor(color);
+	}
+	/**
+         * When the color values from the dialog are changed, this method will
+         * be called. Here, we'll just change the color of the dialog's button.
+         */
+	@Override
+        public void onColorChanged(@ColorInt int color, String hex, String hexNoAlpha) {
+            Log.d("Color", String.valueOf(color));
+            Log.d("Hex", hex);
+            Log.d("Hex no alpha", hexNoAlpha);
+            // Save the color selected so we can retrieve it again
+            // when the device is rotated
+            currentColor = color;
+            colorPicker.setDialogButtonTextColor(color);
         }
     });
 ```
-
-That's all :)
-
-### Transition from v1.1 to v1.2
-
-The deprecated callback has been removed. See *Transition from v1.0 to v1.1*.
-
-### Transition from v1.0 to v1.1
-
-Version 1.1 introduced some API changes---mainly a renaming of the `OnColorSelected` callback interface. This has been renamed to `ColorPickerCallback`.
-
-The old interface is still in the library but will be removed in the next version update. It has been marked as deprecated and isn't called by the library, therefore no values will appear in your app if you still rely on the old interface.
- 
 
 ## Translations
 ### Available Languages
@@ -119,17 +122,6 @@ The old interface is still in the library but will be removed in the next versio
 * Korean
 * Turkish
 * Russian
-
-If you would like to help localise this library please fork the project, create and verify your language files, add the language to the README then create a pull request.
-
-
-## Example
-
-Example app that use Android Material Color Picker Dialog to let users choose the color of the Qr Code:
-
-[Qr Code Generator Play Store](https://play.google.com/store/apps/details?id=com.pes.qrcodegeneratorv2)
-
-[Qr Code Generator Direct Download](http://www.simonepessotto.it/App/QrCodeGeneratorRevolution.apk)
 
 ## Contributors
 
