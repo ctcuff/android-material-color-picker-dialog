@@ -34,24 +34,29 @@ repositories {
 }
 ```
     
-(module)
+(module) 
+using Gradle:
 ```groovy    
 dependencies {
-    // will update soon
+    compile 'com.cameron.materialcolorpicker:materialcolorpicker:2.0.0'
 }
+```
+using Maven:
+```XML
+<dependency>
+    <groupId>com.cameron.materialcolorpicker</groupId>
+    <artifactId>materialcolorpicker</artifactId>
+    <version>2.0.0</version>
+    <type>pom</type>
+</dependency>
 ```
 
 ### Use the library
 
-Import the class
-```java
-    // will update soon
-```
-
 Create a color picker dialog object
 
 ```java
-    ColorPicker colorPicker = new ColorPicker(context, red, green, blue);
+ColorPicker colorPicker = new ColorPicker(context, red, green, blue);
 ```
 
 red, green, and blue are 3 integer (value 0-255) for the initialization of the color picker with your custom color value. If you don't want to start with a color set them to 0 or use only the first argument.
