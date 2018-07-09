@@ -29,16 +29,16 @@ dependency in your `build.gradle`.
     
 (root)
 ```groovy
-    repositories {
-        jcenter()
-    }
+repositories {
+    jcenter()
+}
 ```
     
 (module)
 ```groovy    
-    dependencies {
-        // will update soon
-    }
+dependencies {
+    // will update soon
+}
 ```
 
 ### Use the library
@@ -54,60 +54,58 @@ Create a color picker dialog object
     ColorPicker colorPicker = new ColorPicker(context, red, green, blue);
 ```
 
-defaultColorR, defaultColorG, defaultColorB are 3 integer (value 0-255) for the initialization of the color picker with your custom color value. If you don't want to start with a color set them to 0 or use only the first argument.
+red, green, and blue are 3 integer (value 0-255) for the initialization of the color picker with your custom color value. If you don't want to start with a color set them to 0 or use only the first argument.
 
 The library also supports alpha values. If no color or only red, green, and blue are specified, the alpha value is set to 255 (0xFF) and no slider is shown.
 
 Use the following constructor to specify an alternative alpha channel value (0..255). As soon as the alpha value constructor is used, a fourth slider will appear above the RGB sliders and the text input field will change from six HEX characters to eight.
 
 ```java
-    ColorPicker colorPicker = new ColorPicker(context, alpha, red, green, blue);
+ColorPicker colorPicker = new ColorPicker(context, alpha, red, green, blue);
 ```
 
 
 Then show the dialog (when and where you want) and save the selected color
 
 ```java
-    // Various configurations, all of the below are optional
-    colorPicker.setCloseOnDialogButtonPressed(true)
-            .setDialogButtonText("CONFIRM")
-            .setCloseOnBackPressed(false)
-            .showButtonAsTransparent(true)
-            // If this activity already implements the ColorPickerCallback,
-            // this last configuration is technically unnecessary
-            .setCallback(this);
-	
-    /* Set a new Listener called when user click "select" */
-    colorPicker.setCallback(new ColorPickerCallback() {
-        @Override
-        public void onColorChosen(@ColorInt int color, String hex, String hexNoAlpha) {
-            Log.d("Pure color", String.valueOf(color));
-            Log.d("Alpha", Integer.toString(Color.alpha(color)));
-            Log.d("Red", Integer.toString(Color.red(color)));
-            Log.d("Green", Integer.toString(Color.green(color)));
-            Log.d("Blue", Integer.toString(Color.blue(color)));
-            Log.d("Hex with alpha", hex);
-            Log.d("Hex no alpha", hexNoAlpha);
-            // Once the dialog's select button has been pressed, we
-            // can get the selected color and use it for the
-            // background of our view
-            colorView.setBackgroundColor(color);
-	}
-	/**
-         * When the color values from the dialog are changed, this method will
-         * be called. Here, we'll just change the color of the dialog's button.
-         */
-	@Override
-        public void onColorChanged(@ColorInt int color, String hex, String hexNoAlpha) {
-            Log.d("Color", String.valueOf(color));
-            Log.d("Hex", hex);
-            Log.d("Hex no alpha", hexNoAlpha);
-            // Save the color selected so we can retrieve it again
-            // when the device is rotated
-            currentColor = color;
-            colorPicker.setDialogButtonTextColor(color);
-        }
-    });
+// Various configurations, all of the below are optional
+colorPicker.setCloseOnDialogButtonPressed(true)
+        .setDialogButtonText("CONFIRM")       // The default text is "SUBMIT"
+        .setCloseOnBackPressed(false)         // The default value is true 
+        .showButtonAsTransparent(true)        // The default value is false
+	.setCloseOnDialogButtonPressed(false) // The default value is true
+// Set a new Listener called when user click "select"
+colorPicker.setCallback(new ColorPickerCallback() {
+    @Override
+    public void onColorChosen(@ColorInt int color, String hex, String hexNoAlpha) {
+        Log.d("Pure color", String.valueOf(color));
+        Log.d("Alpha", Integer.toString(Color.alpha(color)));
+        Log.d("Red", Integer.toString(Color.red(color)));
+        Log.d("Green", Integer.toString(Color.green(color)));
+        Log.d("Blue", Integer.toString(Color.blue(color)));
+        Log.d("Hex with alpha", hex);
+        Log.d("Hex no alpha", hexNoAlpha);
+        // Once the dialog's select button has been pressed, we
+        // can get the selected color and use it for the
+        // background of our view
+        colorView.setBackgroundColor(color);
+    }
+
+    /**
+     * When the color values from the dialog are changed, this method will
+     * be called. Here, we'll just change the color of the dialog's button.
+     */
+    @Override
+    public void onColorChanged(@ColorInt int color, String hex, String hexNoAlpha) {
+        Log.d("Color", String.valueOf(color));
+        Log.d("Hex", hex);
+        Log.d("Hex no alpha", hexNoAlpha);
+        // Save the color selected so we can retrieve it again
+        // when the device is rotated
+        currentColor = color;
+        colorPicker.setDialogButtonTextColor(color);
+    }
+});
 ```
 
 ## Translations
