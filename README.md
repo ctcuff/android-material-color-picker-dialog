@@ -1,5 +1,3 @@
-[ ![Download](https://api.bintray.com/packages/pes8/maven/Material-Color-Picker-Dialog/images/download.svg) ](https://bintray.com/pes8/maven/Material-Color-Picker-Dialog/_latestVersion) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DV499BFU9XWFQ)
-
 # Android Material Color Picker Dialog
 A simple, minimalistic and beautiful dialog color picker for Android 4.1+ devices. This color picker is easy-to-use and easy-to-integrate in your application to let users of your app choose color in a simple way.
 
@@ -16,14 +14,12 @@ Design inspired from [Dribbble](https://dribbble.com/shots/1858968-Material-Desi
 
 Portrait
 
-![Portrait RGB](screenshots/main_portrait_rgb.png)
-![Portrait ARGB](screenshots/main_portrait_argb.png)
+<img src="screenshots/material-picker-portrait.png" width="350"> <img src="screenshots/material-picker-alpha-portrait.png" width="350">
 
 Landscape
 
-![Landscape RGB](screenshots/main_landscape_rgb.png)
-![Landscape ARGB](screenshots/main_landscape_argb.png)
-
+<img src="screenshots/material-picker-land.png" width="600">
+<img src="screenshots/material-land-alpha.png" width="600">
 
 ## HOW TO USE IT
 
@@ -134,11 +130,6 @@ Example app that use Android Material Color Picker Dialog to let users choose th
 [Qr Code Generator Play Store](https://play.google.com/store/apps/details?id=com.pes.qrcodegeneratorv2)
 
 [Qr Code Generator Direct Download](http://www.simonepessotto.it/App/QrCodeGeneratorRevolution.apk)
-
-## Donation
-If this project help you reduce time to develop, you can give me a cup of coffee :) 
-
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DV499BFU9XWFQ)
 
 ## Contributors
 
