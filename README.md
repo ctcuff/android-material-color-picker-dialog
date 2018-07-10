@@ -1,7 +1,7 @@
 # Android Material Color Picker Dialog
 A simple, minimalistic and beautiful dialog color picker for Android 4.1+ devices. This color picker is easy-to-use and easy-to-integrate in your application to let users of your app choose color in a simple way.
 
-NOTE: The original library can be viewed [here](https://github.com/Pes8/android-material-color-picker-dialog)
+NOTE: The original library can be viewed [here](https://github.com/Pes8/android-material-color-picker-dialog), this merely adds a few extra customization options
 
 Features
 - Get Hex and (A)RGB color codes
@@ -59,9 +59,9 @@ Create a color picker dialog object
 ColorPicker colorPicker = new ColorPicker(context, red, green, blue);
 ```
 
-red, green, and blue are 3 integer (value 0-255) for the initialization of the color picker with your custom color value. If you don't want to start with a color set them to 0 or use only the first argument.
+red, green, and blue are 3 integers (with value ranging from 0 to 255) to be used for the initialization of the color picker with your custom color value. If you don't want to start with a color set them to 0 or use only the first argument.
 
-The library also supports alpha values. If no color or only red, green, and blue are specified, the alpha value is set to 255 (0xFF) and no slider is shown.
+The library also supports alpha values. If no color or only red, green, and blue are specified, the alpha value is set to 255.
 
 Use the following constructor to specify an alternative alpha channel value (0..255). As soon as the alpha value constructor is used, a fourth slider will appear above the RGB sliders and the text input field will change from six HEX characters to eight.
 
@@ -69,8 +69,8 @@ Use the following constructor to specify an alternative alpha channel value (0..
 ColorPicker colorPicker = new ColorPicker(context, alpha, red, green, blue);
 ```
 
-
-Then show the dialog (when and where you want) and save the selected color
+You can show the dialog directly after this or customize it, as shown below. Note that if your activity does not directly 
+implement the `ColorPickerCallback` interface, you can set an callback manually.
 
 ```java
 // Various configurations, all of the below are optional
