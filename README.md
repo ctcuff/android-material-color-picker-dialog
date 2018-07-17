@@ -74,8 +74,7 @@ implement the `ColorPickerCallback` interface, you can set an callback manually.
 
 ```java
 // Various configurations, all of the below are optional
-colorPicker.setCloseOnDialogButtonPressed(true)
-        .setDialogButtonText("CONFIRM")       // The default text is "SUBMIT"
+colorPicker.setDialogButtonText("CONFIRM")    // The default text is "SUBMIT"
         .setCloseOnBackPressed(false)         // The default value is true 
         .showButtonAsTransparent(true)        // The default value is false
 	.setCloseOnDialogButtonPressed(false) // The default value is true
